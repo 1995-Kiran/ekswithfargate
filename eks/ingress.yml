@@ -1,27 +1,18 @@
-# Annotations Reference: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/ingress/annotations/
-apiVersion: networking.k8s.io/v1
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: app1-ingress-service
-  namespace: fp-dev     
+  name: "my-app"
+  namespace: "default"
   annotations:
-    # Load Balancer Name
-    alb.ingress.kubernetes.io/load-balancer-name: ingress-fargatedemo
-    # Ingress Core Settings  
-    #kubernetes.io/ingress.class: "alb" (OLD INGRESS CLASS NOTATION - STILL WORKS BUT RECOMMENDED TO USE IngressClass Resource)
+    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-
-
-    # For Fargate
-    alb.ingress.kubernetes.io/target-type: ip    
+  labels:
+    app: spring
 spec:
   rules:
-    - http:
-        paths:      
-          - path: /*
-            pathType: Prefix
-            backend:
-              service:
-                name: my-app
-                port: 
-                  number: 80  
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: "my-app"
+          servicePort: 80
