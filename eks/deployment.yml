@@ -30,3 +30,10 @@ spec:
         image: 276264299222.dkr.ecr.us-east-2.amazonaws.com/kiran-ecr:latest
         ports:
         - containerPort: 8080
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "500Mi"
+            cpu: "1000m"
