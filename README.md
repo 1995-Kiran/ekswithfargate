@@ -1,3 +1,3 @@
 # ekswithfargate
 
-kubectl port-forward svc/my-app 8080:80
+#kubectl port-forward svc/my-app 8080:80
